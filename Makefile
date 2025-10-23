@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbraga <lbraga@student.42.fr>              +#+  +:+       +#+         #
+#    By: lbraga <lbraga@student.42liboa.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 16:04:42 by lbraga            #+#    #+#              #
-#    Updated: 2025/09/27 08:49:11 by lbraga           ###   ########.fr        #
+#    Updated: 2025/10/23 18:24:57 by lbraga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,27 +17,26 @@ CFLAGS	=	-Wall -Wextra -Werror -I.
 LIBC	=	ar rcs
 RM		=	rm -f
 
-SRC		=	ft_printf.c ft_format.c
+SRC		=	ft_printf.c ft_pformat.c
 
 OBJ		=	$(SRC:.c=.o)
 	
 all: $(NAME)
 $(NAME): $(OBJ)
-	@echo "Linking $(NAME)"
 	@$(LIBC) $(NAME) $(OBJ)
-	@echo "Complete"
+	@echo "$(NAME) created"
 
 %.o: %.c $(HEADER)
 	@echo "Compiling $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "Cleaning"
 	@$(RM) $(OBJ)
+	@echo "Objects deleted"
 
 fclean: clean
-	@echo "Cleaning Headers"
 	@$(RM) $(NAME)
+	@echo "Library deleted"
 
 re: fclean all
 
