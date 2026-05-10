@@ -6,7 +6,7 @@
 #    By: lbraga <lbraga@student.42lisboa.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 16:04:42 by lbraga            #+#    #+#              #
-#    Updated: 2025/10/23 20:54:13 by lbraga           ###   ########.fr        #
+#    Updated: 2026/05/09 20:16:57 by lbraga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,28 +15,31 @@ HEADER	=	ft_printf.h
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -I.
 LIBC	=	ar rcs
-RM		=	rm -f
-
+RM		=	rm -rf
+OBJ		=	$(SRC:%.c=obj/%.o)
 SRC		=	ft_printf.c ft_pformat.c
+RED			= \033[1;31m
+GREEN		= \033[1;32m
+CYAN		= \033[0;36m
+RESET		= \033[0m
 
-OBJ		=	$(SRC:.c=.o)
-	
 all: $(NAME)
 $(NAME): $(OBJ)
 	@$(LIBC) $(NAME) $(OBJ)
-	@echo "$(NAME) created"
+	@echo "$(GREEN)[$(NAME) created]"
 
-%.o: %.c $(HEADER)
-	@echo "Compiling $<"
+obj/%.o: %.c $(HEADER)
+	@mkdir -p obj
+	@echo "$(CYAN)$<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@$(RM) $(OBJ)
-	@echo "Objects deleted"
+	@$(RM) obj
+	@echo "$(RED)X library removed"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "Library deleted"
+	@echo "$(RED)X $(NAME) removed"
 
 re: fclean all
 
